@@ -1,6 +1,6 @@
 ## A script to remove old or expired slots from elearning
 
-### This script is designed for elearning.tgm.ac.at and is not intended for anythign else. Beside that it works only for specific elearning courses.
+### This script is designed for elearning.tgm.ac.at and is not intended for anything else. Besides that it only works for specific elearning courses.
 
 ### How to install?
 1. Install [Tampermonkey](https://www.tampermonkey.net/)
