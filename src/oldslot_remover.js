@@ -26,16 +26,16 @@
     for (let i = 0; i < getRows.length; i++) {
         let currentData = getRows[i].getElementsByTagName("td")[0];
         if (currentData.className == "header c5 lastcol") continue;
-        else {
-            let date = currentData.firstChild.innerText;
 
-            // Since some of the date values are not valid and therefore cannot be converted to a Date object, why not create one?
-            // Beside that the format for Date is same for every subject
-            date = getValidDate(date).getTime() / 1000;
+        let date = currentData.firstChild.innerText;
 
-            if (date < currentDate) toRemove++;
+        // Since some of the date values are not valid and therefore cannot be converted to a Date object, why not create one?
+        // Beside that the format for Date is same for every subject
+        date = getValidDate(date).getTime() / 1000;
 
-        }
+        if (date < currentDate) toRemove++;
+
+
 
     }
 
