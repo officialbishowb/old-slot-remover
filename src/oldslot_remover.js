@@ -17,12 +17,14 @@
 
     let getTable = document.getElementsByTagName("table");
     // As per my understanding there max 3 tables in one register slot course
-    for (let i = 0; i < getTable.length; i++) {
-        if (getTable[i].id != "slotbookertable") {
-            main_func(getTable[i]);
-            break;
-        }
+    if (getTable.length == 3) {
+        main_func(getTable[1]);
+    } else if (getTable.length == 2) {
+        main_func(getTable[0]);
+    } else {
+        console.log("There are either no tables or more than 3 tables in the page!");
     }
+
 
 
 
