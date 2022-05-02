@@ -41,11 +41,11 @@
 
     if (toRemove >= totalCounts) {
         // remove the whole table as it contains only expired slots
-        getTable.innerHTML = null;
+        getTable.innerHTML = "";
     } else {
         // Remove the table rows from the top
         for (let i = 0; i < totalCounts; i++) {
-            getRows[i].innerHTML = null;
+            getRows[i].innerHTML = "";
         }
     }
 
