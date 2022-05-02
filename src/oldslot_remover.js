@@ -22,7 +22,7 @@
     } else if (getTable.length == 2) {
         main_func(getTable[0]);
     } else {
-        console.log("There are either no tables or more than 3 tables in the page!");
+        console.log("There is either only 1 table or more than 3 tables in the page!");
     }
 
 
