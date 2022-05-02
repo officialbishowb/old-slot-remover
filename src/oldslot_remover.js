@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description This script removes the old/expired slots that you can see if you want to register a time slot for [MEDT,NWTK,SYT,ITSI,SEW]
-// @author       @officialbishowb[github.com/officialbishowb]
+// @author       @officialbishowb
 // @match        https://elearning.tgm.ac.at/mod/scheduler/view.php?id=219076
 // @match        https://elearning.tgm.ac.at/mod/scheduler/view.php?id=219078
 // @match        https://elearning.tgm.ac.at/mod/scheduler/view.php?id=219079
@@ -15,8 +15,25 @@
 (function() {
     'use strict';
 
-    let getTable = document.getElementsByTagName("table")[0];
-    let getRows = getTable.getElementsByTagName("tr");
+    let getTable = document.getElementsByTagName("table");
+    // As per my understanding there max 3 tables in one register slot course
+    for (let i = 0; i < getTable.length; i++) {
+        if (getTable[i].id != "slotbookertable") {
+            main_func(getTable[i]);
+            break;
+        }
+    }
+
+
+
+
+})();
+
+function main_func(main_table) {
+    console.log(main_table);
+    let mainTable = main_table;
+
+    let getRows = mainTable.getElementsByTagName("tr");
 
     let currentDate = new Date().setHours(0, 0, 0, 0) / 1000;
 
@@ -25,7 +42,6 @@
     var totalCounts = getRows.length - 1;
     for (let i = 0; i < getRows.length; i++) {
         let currentData = getRows[i].getElementsByTagName("td")[0];
-        console.log(currentData);
         if (currentData.className == "header c5 lastcol") continue;
 
         let date = currentData.firstChild.innerText;
@@ -42,7 +58,7 @@
 
     if (toRemove >= totalCounts) {
         // remove the whole table as it contains only expired slots
-        getTable.style.display = "none";
+        mainTable.style.display = "none";
     } else {
         // Remove the table rows from the top
         for (let i = 0; i < totalCounts; i++) {
@@ -50,10 +66,7 @@
         }
     }
 
-
-
-})();
-
+}
 
 function getValidDate(string_date) {
     const months = {
