@@ -61,6 +61,11 @@ function main_func(main_table) {
     if (toRemove >= totalCounts) {
         // remove the whole table as it contains only expired slots
         mainTable.style.display = "none";
+        for (let i = 0; i < document.getElementsByTagName("h3").length; i++) {
+            if (document.getElementsByTagName("h3")[i].innerText == "Aktuelle Zeitfenster") {
+                document.getElementsByTagName("h3")[i].style.display = "none";
+            }
+        }
     } else {
         // Remove the table rows from the top
         for (let i = 0; i < totalCounts; i++) {
