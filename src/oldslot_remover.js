@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Old slot remover
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.3
 // @description This script removes the old/expired slots that you can see if you want to register a time slot for [MEDT,NWTK,SYT,ITSI,SEW]
-// @author       @officialbishowb[github.com/officialbishowb]
+// @author       @officialbishowb
 // @match        https://elearning.tgm.ac.at/mod/scheduler/view.php?id=219076
 // @match        https://elearning.tgm.ac.at/mod/scheduler/view.php?id=219078
 // @match        https://elearning.tgm.ac.at/mod/scheduler/view.php?id=219079
@@ -15,13 +15,32 @@
 (function() {
     'use strict';
 
-    let getTable = document.getElementsByTagName("table")[0];
-    let getRows = getTable.getElementsByTagName("tr");
+    let getTable = document.getElementsByTagName("table");
+    // As per my understanding there max 3 tables in one register slot course
+    if (getTable.length == 3) {
+        main_func(getTable[1]);
+    } else if (getTable.length == 2) {
+        main_func(getTable[0]);
+    } else {
+        console.log("There is either only 1 table or more than 3 tables in the page!");
+    }
+
+
+
+
+
+})();
+
+function main_func(main_table) {
+
+    let mainTable = main_table;
+
+    let getRows = mainTable.getElementsByTagName("tr");
 
     let currentDate = new Date().setHours(0, 0, 0, 0) / 1000;
 
 
-    var toRemove = 0;
+    var removed = 0;
     var totalCounts = getRows.length - 1;
     for (let i = 0; i < getRows.length; i++) {
         let currentData = getRows[i].getElementsByTagName("td")[0];
@@ -33,26 +52,25 @@
         // Beside that the format for Date is same for every subject
         date = getValidDate(date).getTime() / 1000;
 
-        if (date < currentDate) toRemove++;
-
-
-
-    }
-
-    if (toRemove >= totalCounts) {
-        // remove the whole table as it contains only expired slots
-        getTable.innerHTML = null;
-    } else {
-        // Remove the table rows from the top
-        for (let i = 0; i < totalCounts; i++) {
-            getRows[i].innerHTML = null;
+        if (date < currentDate) {
+            getRows[i].style.display = "none";
+            removed++;
         }
+
+        if (removed >= totalCounts) {
+
+            mainTable.style.display = "none";
+            for (let i = 0; i < document.getElementsByTagName("h3").length; i++) {
+                if (document.getElementsByTagName("h3")[i].innerText == "Aktuelle Zeitfenster") {
+                    document.getElementsByTagName("h3")[i].style.display = "none";
+                }
+            }
+        }
+
+
     }
 
-
-
-})();
-
+}
 
 function getValidDate(string_date) {
     const months = {
