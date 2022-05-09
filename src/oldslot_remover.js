@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Old slot remover
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.3
 // @description This script removes the old/expired slots that you can see if you want to register a time slot for [MEDT,NWTK,SYT,ITSI,SEW]
 // @author       @officialbishowb
 // @match        https://elearning.tgm.ac.at/mod/scheduler/view.php?id=219076
